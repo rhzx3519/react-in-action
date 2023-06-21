@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    .danger {
+        color: red;
+    }
+  </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                name: '',
+                nameError: '',
+                password: '',
+                passwordError: '',
+                sex: '1',
+                phone: '',
+                city: '',
+            }
+
+            handleSubmit = () => {
+                alert(JSON.stringify(this.state))
+                console.log(this.state)
+            }
+
+            handleInput = (e) => {
+                this.setState({[e.target.name]: e.target.value})
+            }
+            
+            // 姓名校验
+            handleName = (e) => {
+                let rule = /^[a-zA-Z0-9_-]{4,10}$/
+                let value = e.target.value
+                let error = ''
+                if (!value) {
+                    error = '请输入昵称'
+                } else if (!rule.test(value)) {
+                    error = '请输入4-10位密码' 
+                } else {
+                    error = ''
+                }
+
+                this.setState({
+                    name: e.target.value,
+                    nameError: error,
+                })
+
+            } 
+            
+            // 密码校验
+            handlePassword = (e) => {
+                let rule = /^[a-zA-Z0-9_-]{6,12}$/
+                let value = e.target.value
+                let error = ''
+                if (!value) {
+                    error = '请输入密码'
+                } else if (!rule.test(value)) {
+                    error = '请输入6-12位密码' 
+                } else {
+                    error = ''
+                }
+
+                this.setState({
+                    password: e.target.value,
+                    passwordError: error,
+                })
+
+            }             
+
+            render() {
+                let { name, nameError, password, passwordError, sex, text, phone, city } = this.state
+                let arr2 = [{id: 1, city: 'Beijing'}, {id: 2, city: 'Hangzhou'}, {id: 3, city: 'Shanghai'}]
+
+                return <div>
+                    <form>
+                        <label>Nickname: 
+                            <input type='text' name='name' defaultValue={name} onChange={this.handleName}/>
+                            <span className='danger'>{nameError}</span>
+                        </label><br/>
+                        <label>Password: 
+                            <input type='password' name='password' defaultValue={password} onChange={this.handlePassword}/>
+                            <span className='danger'>{passwordError}</span>
+                        </label><br/>
+                        <label>Gender: 
+                            <input type='radio' value='1' defaultChecked={sex === '1' ? true : false}/>Male
+                            <input type='radio' value='2' defaultChecked={sex === '2' ? true : false}/>Female
+                        </label><br/>
+                        <label>Phone: <input type='text' name='phone' defaultValue={phone} onChange={this.handleInput}/></label><br/>
+                        <label>数组元素是对象，循环出来的选项
+                            <select defaultValue={city} name='city' onChange={this.handleInput}>
+                                {
+                                    arr2.map(item => 
+                                        <option key={item.id} value={item.id}>{item.city}</option>
+                                    )
+                                }
+                            </select>    
+                        </label><br/>
+
+                        <button onClick={this.handleSubmit}>Submit</button>
+                    </form>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

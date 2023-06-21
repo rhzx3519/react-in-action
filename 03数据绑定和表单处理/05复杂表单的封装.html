@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                name: 'Jim',
+                sex: '1',
+                text: '123',
+                select: 'A',
+                select1: 'E',
+                select2: 1,
+            }
+
+            handleSubmit = () => {
+                alert(JSON.stringify(this.state))
+                console.log(this.state)
+            }
+
+            handleInput = (e) => {
+                this.setState({[e.target.name]: e.target.value})
+            }
+
+            render() {
+                let {name, sex, select, text, select1, select2} = this.state
+                let arr1 = ['D', 'E', 'F']
+                let arr2 = [{id: 1, color: 'red'}, {id: 2, color: 'blue'}, {id: 3, color: 'yellow'}]
+
+                return <div>
+                    <form>
+                        <label>Name: <input type='text' name='name' defaultValue={name} onChange={this.handleInput}/></label><br/>
+                        <label>Gender: 
+                            <input type='radio' value='1' defaultChecked={sex === '1' ? true : false}/>Male
+                            <input type='radio' value='2' defaultChecked={sex === '2' ? true : false}/>Female
+                        </label><br/>
+                        <label>写死的选项
+                            <select defaultValue={select} name='select' onChange={this.handleInput}>
+                                <option value='A'>A</option>
+                                <option value='B'>B</option>
+                                <option value='C'>C</option>
+                            </select>    
+                        </label><br/>
+                        <label>循环出来的选项
+                            <select defaultValue={select1} name='select1' onChange={this.handleInput}>
+                                {/* 用循环写出每一项，这是一般情况，如果是比较复杂的数组，比如数组中是对象 */}
+                                {
+                                    arr1.map((item, index) => 
+                                        <option key={index} value={item}>{item}</option>
+                                    )
+                                }
+                            </select>    
+                        </label><br/>
+                        <label>数组元素是对象，循环出来的选项
+                            <select defaultValue={select2} name='select2' onChange={this.handleInput}>
+                                {
+                                    arr2.map(item => 
+                                        <option key={item.id} value={item.id}>{item.color}</option>
+                                    )
+                                }
+                            </select>    
+                        </label><br/>
+                        <label>备注：
+                            <textarea defaultValue={text} name='text' onChange={this.handleInput}></textarea>
+                        </label><br/><br/>
+                        <button onClick={this.handleSubmit}>Submit</button>
+                    </form>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

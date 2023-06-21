@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root1"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            // render是生命周期里面非常基础和底层的方法，一定要用它来进行渲染
+            render() {
+                return <div>
+                    <h1>我是一个有状态组件</h1>
+                    <p>Name: {this.props.name}</p>
+                    <p>Age: {this.props.age}</p>
+                    <p>Skill: CV</p>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello name='Eren' age='10'/>,
+            document.getElementById('root1')
+        )
+    </script>
+</body>
+</html>

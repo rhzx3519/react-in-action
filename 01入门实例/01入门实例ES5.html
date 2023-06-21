@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- React底层核心库 -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <!-- React操作DOM的核心库，类似于jQuery -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+<body>
+  <!--
+      React 渲染三步走
+      1. 定义一个容器用于存放虚拟DOM
+      2. 创建虚拟DOM元素
+      3. 把虚拟DOM元素渲染到页面上
+  -->
+  <div id="root1"></div>
+  <div id="root2"></div>
+
+  <script>
+    // ES5方法创建
+    // var element = React.createElement('li', {}, 'hello')  // 节点，节点属性，标签内容
+    var element = React.createElement('li', null, 'hello')  // 节点，节点属性，标签内容
+    ReactDOM.render(element, document.getElementById('root1'))
+
+    // 多层嵌套关系
+    var li1 = React.createElement('li', null, '1111')
+    var li2 = React.createElement('li', {className: 'list-li'}, '2222')
+    var _ul = React.createElement('ul', {id: 'list'}, li1, li2)
+    ReactDOM.render(_ul, document.getElementById('root2'))
+  </script>
+</body>
+</html>

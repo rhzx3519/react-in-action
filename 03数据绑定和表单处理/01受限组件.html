@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            render() {
+                return <input type='text' value='123'/>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+
+    <!-- 双向数据绑定 -->
+    <hr/>
+    <div id="root1"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                value: '456'
+            }
+
+            handleChange = (e) => {
+                console.log(e)
+                this.setState({value: e.target.value})
+            }
+
+            render() {
+                const {value} = this.state
+                return <div>
+                    <input type='text' value={value} onChange={this.handleChange}/>
+                    <p>{value}</p>
+                </div>
+
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root1')
+        )
+    </script>
+
+    <!-- radio、checkbox、textarea、select -->
+    <hr/>
+    <div id="root2"></div>
+    <script type="text/babel">
+        class Rts extends React.Component {
+
+            render() {
+                return <div>
+                    <input type='radio' checked/><br/>
+                    <input type='checkbox' checked/><br/>
+                    <input type='checkbox' checked/><br/>
+                    <input type='checkbox' checked/><br/>
+                    <input type='checkbox' checked/><br/>
+                    <input type='checkbox' checked/><br/>
+                    <select>
+                        <option value='A'>A</option>
+                        <option value='B'>B</option>
+                        <option value='C'>C</option>
+                    </select>
+                </div>
+
+            }
+        }
+
+        ReactDOM.render(
+            <Rts />,
+            document.getElementById('root2')
+        )
+    </script>
+</body>
+</html>

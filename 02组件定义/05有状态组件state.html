@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root1"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            constructor(props) {
+                // 子类必须在constructor构造器中调用super()方法，从而得到父类的this对象,
+                // 否则会报错。super是把属性传递给父级的构造类对象
+                super(props)
+                this.state = {
+                    name: "hello",
+                    age: 18,
+                }
+                // super()加不加props的区别
+                // 需要在构造函数中使用this.props/props则在构造器super()中添加props参数
+                // 如果不需要传值的话，就不用在super()中接收props
+                console.log(this.props)
+            }
+
+            render() {
+                return <div>
+                    <h1>我是一个有状态组件</h1>
+                    <p>Name: {this.state.name}</p>
+                    <p>Age: {this.state.age}</p>
+                    <p>Skill: CV</p>
+                    <p>Input Name: {this.props.name}</p>
+                    <p>Input Age: {this.props.age}</p>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello name='Eren' age='10'/>,
+            document.getElementById('root1')
+        )
+    </script>
+</body>
+</html>

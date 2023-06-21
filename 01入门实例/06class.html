@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <script type="text/babel">
+        // 生成实例对象的传统方法: 通过构造函数
+        function Person(x, y) {
+            this.x = x
+            this.y = y
+        }
+        Person.prototype.add = function() {
+            console.log(this.x + this.y)
+        }
+        let p = new Person(1, 2)
+
+        // 上面的代码改写成ES6的class
+        class Animal {
+            constructor(x, y) {
+                this.x = x
+                this.y = y
+            }
+            add() {
+                console.log(this.x + this.y)
+            }
+        }
+
+        let a = new Animal(2, 3)
+        console.log(typeof Animal)  // funciton
+        Animal == Animal.prototype.constructor // true
+
+        // 构造函数的prototype属性，在ES6类上面继续存在, 实际上，类所有的方法都是定义在prototype上
+        class Dog {
+            constructor() {}
+            add() {}
+        }
+        // 等同于
+        Dog.prototype = {
+            constructor() {},
+            add() {}
+        }
+        // constructor(), add()都是定义在Animal.prototype上
+        // 所以在类的实例上调用方法，其实就是调用原型上的方法
+
+        class B {
+
+        }
+        let b = new B()
+        b.constructor = B.prototype.constructor // true
+        // b是B的实例
+        // 定义类, 跟ES5一样，实例的属性除非显式定义在其本身(即定义在this对象), 
+        // 否则都是定义在原型上(即定义在class上) 
+        class Hello {
+            constructor(x, y) {
+                this.x = x
+                // this.add = this.add.bind(this)
+            }
+
+            add() {
+                console.log(this.x)
+            }
+        }
+
+        let hello = new Hello(2)
+        hello.add() // 2
+        // hasOwnProperty 指示对象自身属性中是否具有指定的属性
+        hello.hasOwnProperty('x') // true
+        hello.hasOwnProperty('y') // false
+        hello.hasOwnProperty('add') // false 如果在constructor中改变this指向的话，这里就是true
+        hello.__proto__.hasOwnProperty('add') // true
+    </script>
+</body>
+</html>

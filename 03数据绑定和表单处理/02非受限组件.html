@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                value: 'hello',
+            }
+            change = (e) => {
+                console.log(e)
+                this.setState({value: e.target.value})
+            }
+            render() {
+                return <div>
+                    <input type='text'/>
+                    <input type='text' defaultValue={this.state.value} onChange={this.change}/>
+                    <p>{this.state.value}</p>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+
+    <hr/>
+    <div id="root1"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+
+            render() {
+                return <div>
+                    <label>空值:
+                        <input type='radio' name = 'eat'/>吃饭
+                        <input type='radio' name = 'eat'/>吃饭
+                    </label>
+                    <label>
+                        <input type='radio' name = 'sex' defaultChecked/>Man
+                        <input type='radio' name = 'sex'/>Woman
+                    </label>
+                    <label>空值:
+                        <input type='checkbox'/>Apple
+                        <input type='checkbox'/>Banana
+                        <input type='checkbox'/>Orange
+                        <input type='checkbox'/>Watermelon
+                    </label>
+                    <label>空值:
+                        <select multiple={true} defaultValue={['A', 'C']}>
+                            <option value='A'>A</option>
+                            <option value='B'>B</option>
+                            <option value='C'>C</option>
+                        </select>
+                    </label>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root1')
+        )
+    </script>
+</body>
+</html>

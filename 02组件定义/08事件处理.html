@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                name: 'jindu',
+                age: 13,
+                flag: true,
+            }
+
+            updateAge() {
+                this.setState({age: this.state.age + 1}) 
+            }
+
+            updateName() {
+                this.setState({name: 'JINDU'}) 
+            }
+
+            updateFlag = () => {
+                this.setState({flag: !this.state.flag}) 
+            } 
+
+            render() {
+                return <div>
+                        <p>这是一个有状态组件</p>
+                        <p>Name: {this.state.name}</p>
+                        <p>Age: {this.state.age}</p>
+                        <p>Flag: {this.state.flag ? 'YES' : 'NO'}</p>
+                        <p>Domain: frontend</p>
+                        <button onClick={this.updateAge.bind(this)}>Update Age</button>
+                        <button onClick={() => this.updateName()}>Update Name</button>
+                        <button onClick={() => this.updateFlag()}>Update Flag</button>
+                    </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+</body>
+</html>

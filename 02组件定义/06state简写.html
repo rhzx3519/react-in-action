@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root1"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                name: "world",
+                age: 13,
+            }
+
+            render() {
+                return <div>
+                    <h1>我是一个有状态组件</h1>
+                    <p>Name: {this.state.name}</p>
+                    <p>Age: {this.state.age}</p>
+                    <p>Skill: CV</p>
+                    <p>Input Name: {this.props.name}</p>
+                    <p>Input Age: {this.props.age}</p>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello name='Eren' age='10'/>,
+            document.getElementById('root1')
+        )
+        /*
+            更多时候我们应该去使用无状态组件, 因为如果是有状态组件的话，它会触发生命周期所对应的一些函数，
+            一旦触发生命周期函数，它就会影响当前项目的运行。
+            
+        */
+    </script>
+</body>
+</html>

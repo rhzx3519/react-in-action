@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            state = {
+                name: 'Jim',
+                password: '',
+                address: '',
+            }
+
+            handleSubmit = () => {
+                alert(JSON.stringify(this.state))
+                console.log(this.state)
+            }
+
+            handleInput = (e) => {
+                this.setState({[e.target.name]: e.target.value})
+            }
+
+            render() {
+                let { name, password, address } = this.state
+
+                return <div>
+                    <form>
+                        <label>Name: <input type='text' name='name' defaultValue={name} onChange={this.handleInput}/></label><br/>
+                        <label>Password: <input type='password' name='password' defaultValue={password} onChange={this.handleInput}/></label><br/>
+                        <label>Address: <input type='text' name='address' defaultValue={address} onChange={this.handleInput}/></label><br/>
+                        <button onClick={this.handleSubmit}>Submit</button>
+                    </form>
+                </div>
+            }
+        }
+
+        ReactDOM.render(
+            <Hello />,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

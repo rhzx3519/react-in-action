@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        function Login(props) {
+            return <button onClick={props.update}>子组件Login</button>
+        }
+
+        function Logout(props) {
+            return <button onClick={props.update}>子组件Logout</button>
+        }
+        class APP extends React.Component {
+            state = {
+                isLogin: false,
+            }
+
+            updateState = () => {
+                this.setState({isLogin: !this.state.isLogin})
+            }
+
+            render() {
+                // const isLogin = this.state.isLogin // 获取状态
+                const { isLogin } = this.state  // 解析赋值
+                // 根据状态不同的值去加载不同的组件，如果是true就加载登录组件，如果是false就加载登出组件
+                return <div>
+                        <h1>这是一个有状态的组件</h1>
+                        {isLogin ? <Login update={this.updateState}/> : <Logout update={this.updateState}/>}
+                        <p>{isLogin.toString()}</p>
+                        <button onClick={this.updateState}>父组件Update State</button>
+                    </div>
+            }
+        }
+
+        ReactDOM.render(
+            <APP />,
+            document.getElementById('root')
+        )
+    </script>
+</body>
+</html>

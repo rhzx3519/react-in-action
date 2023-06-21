@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- React底层核心库 -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <!-- React操作DOM的核心库，类似于jQuery -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- 用于解析ES6的语法 -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="root1"></div>
+  <script type="text/babel">
+    // ES5方法创建必须使用type=text/babel
+    // Babel会把JSX转义为一个名为React.createElement()函数调用
+    ReactDOM.render(
+      <ul>
+        <li className='lili'>1111</li>
+        <li>2222</li>
+      </ul>,
+      document.getElementById('root1')
+    )
+  </script>
+
+  <div id="root2"></div>
+  <script type="text/babel">
+    let div = <div className="hello"><h1>hello</h1></div>
+    ReactDOM.render(div, document.getElementById('root2'))
+  </script>
+</body>
+</html>
