@@ -1,23 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import FzIndex from './01fzProps/Index'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>下面是父子组件互相传值和props传值校验示例</p>
+      <FzIndex />
     </div>
   );
 }
